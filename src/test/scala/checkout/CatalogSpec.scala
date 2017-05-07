@@ -19,23 +19,23 @@ class CatalogSpec extends FlatSpec with Matchers {
     val orange = Item("Orange", 25)
     val codeWithUpperCase = appleText.toUpperCase()
     val codeWithSpaces = (" " + appleText + " ")
-    val unknownEntries = "kiwi"
+    val unknownEntry = "kiwi"
   }
 
   "HARDCODED_CATALOG" should "retrieve apples and oranges by (hardcoded) code" in new WithCodesAndCatalog {
-    catalog.productByCode(appleText) should be(apple)
-    catalog.productByCode(orangeText) should be(orange)
+    catalog.productByCode(appleText) should be(Left(apple))
+    catalog.productByCode(orangeText) should be(Left(orange))
   }
 
   it should "not be case sensitive with items codes" in new WithCodesAndCatalog {
-    catalog.productByCode(codeWithUpperCase) should be(apple)
+    catalog.productByCode(codeWithUpperCase) should be(Left(apple))
   }
 
   it should "not take into account spaces" in new WithCodesAndCatalog {
-    catalog.productByCode(codeWithSpaces) should be(apple)
+    catalog.productByCode(codeWithSpaces) should be(Left(apple))
   }
 
   it should "filter unknown codes" in new WithCodesAndCatalog {
-    catalog.productByCode(unknownEntries) should be(Item.UNKNOWN)
+    catalog.productByCode(unknownEntry) should be(Right(unknownEntry))
   }
 }

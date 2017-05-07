@@ -14,7 +14,7 @@ class CheckoutSpec extends FlatSpec with Matchers {
     implicit val catalog = Catalog.HARDCODED_CATALOG
 
     val apple = Item("apple", 60)
-    val orange = Item("apple", 25)
+    val orange = Item("orange", 25)
     val items = Seq(apple, orange)
 
     val checkout = new Checkout
